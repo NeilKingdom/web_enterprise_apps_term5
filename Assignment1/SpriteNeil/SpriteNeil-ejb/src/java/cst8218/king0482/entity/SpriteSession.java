@@ -20,6 +20,7 @@ public class SpriteSession implements SpriteSessionRemote {
     @Inject
     private SpriteGame spriteGame;
 
+    @Override
     public List<Sprite> getSpriteList() {
         return spriteGame.getSpriteList();
     }
