@@ -30,7 +30,12 @@
                     <h:outputLabel value="#{bundle.CreateSpriteLabel_dy}" for="dy" />
                     <h:inputText id="dy" value="#{spriteController.selected.dy}" title="#{bundle.CreateSpriteTitle_dy}" />
                     <h:outputLabel value="#{bundle.CreateSpriteLabel_color}" for="color" />
-                    <h:inputText id="color" value="#{spriteController.selected.color}" title="#{bundle.CreateSpriteTitle_color}" />
+                    <span>
+                        <!-- value is what will be set by the converter method -->
+                        <h:inputText id="color" value="#{spriteController.selected.color}" title="#{bundle.CreateSpriteTitle_color}">
+                            <f:converter converterId = "cst8218.king0482.entity.ColorConverter" />
+                        </h:inputText>
+                    </span>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{spriteController.create}" value="#{bundle.CreateSpriteSaveLink}" />

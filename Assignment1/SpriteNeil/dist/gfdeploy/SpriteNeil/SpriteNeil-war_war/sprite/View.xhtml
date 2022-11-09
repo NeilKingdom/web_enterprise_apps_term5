@@ -30,9 +30,11 @@
                     <h:outputText value="#{bundle.ViewSpriteLabel_dy}"/>
                     <h:outputText value="#{spriteController.selected.dy}" title="#{bundle.ViewSpriteTitle_dy}"/>
                     <h:outputText value="#{bundle.ViewSpriteLabel_color}"/>
-                    <h:outputText value="#{spriteController.selected.color}" title="#{bundle.ViewSpriteTitle_color}"/>
+                    <h:outputText value="#{spriteController.selected.color}" title="#{bundle.ViewSpriteTitle_color}">
+                        <f:converter converterId = "cst8218.king0482.entity.ColorConverter" />
+                    </h:outputText>
                 </h:panelGrid>
-                <br />
+                <br />                        
                 <h:commandLink action="#{spriteController.destroyAndView}" value="#{bundle.ViewSpriteDestroyLink}"/>
                 <br />
                 <br />
