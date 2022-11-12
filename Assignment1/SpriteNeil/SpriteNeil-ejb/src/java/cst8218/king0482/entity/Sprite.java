@@ -8,6 +8,7 @@ package cst8218.king0482.entity;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Random;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -168,6 +169,24 @@ public class Sprite implements Serializable {
         x += dx;
         y += dy;
     }
+    
+    public void update(Sprite sprite) {
+        if (this.equals(sprite))
+        {
+            return;
+        }
+        
+        this.setPanelWidth(sprite.getPanelWidth());
+        this.setPanelHeight(sprite.getPanelHeight());
+        this.setX(sprite.getX());
+        this.setY(sprite.getY());
+        this.setDx(sprite.getDx());
+        this.setDy(sprite.getDy());
+        if (sprite.getColor() != null)
+        {
+            this.setColor(sprite.getColor());
+        }
+    }
 
     @Override
     public int hashCode() {
@@ -188,6 +207,27 @@ public class Sprite implements Serializable {
             return false;
         }
         return true;
+    }
+    
+    public boolean isSameAs(Object object) {
+        if (!(object instanceof Sprite)) {
+            return false;
+        }
+        Sprite other = (Sprite) object;
+        if (!Objects.equals(this.id, other.id)
+         || this.panelWidth != other.panelWidth
+         || this.panelHeight != other.panelHeight
+         || this.x != other.x
+         || this.y != other.y
+         || this.dx != other.dx
+         || this.dy != other.dy
+         || this.color != other.color
+           ) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
     @Override

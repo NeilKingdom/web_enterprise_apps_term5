@@ -5,7 +5,9 @@
 package cst8218.king0482.resources;
 
 import cst8218.king0482.entity.Sprite;
+import cst8218.king0482.util.JsfUtil;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -34,18 +36,64 @@ public class SpriteFacadeREST extends AbstractFacade<Sprite> {
         super(Sprite.class);
     }
 
+    // POST on sprite table
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Sprite entity) {
         super.create(entity);
     }
-
+    
+    // POST on specific entity
+    @POST
+    @Path("{id}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public void update(@PathParam("id") Long id, Sprite entity) throws Exception {
+        try {
+            // Check if any sprites with the specified ID exist
+            if (super.find(id) == null) {
+                System.out.println("DEBUG sprite with id " + id + " does not exist");
+                throw new Exception();
+            }
+            // Update if ID in JSON content matches ID in PathParam
+            else if (id == (long)entity.getId()) {
+                super.update(entity);
+            }
+            // ID in JSON content does not match ID in PathParam
+            else {
+                System.out.println("DEBUG Ids don't match");
+                throw new Exception();
+            }
+        }
+        catch (Exception e) {
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
+    }
+    
+    // PUT on specific entity
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Long id, Sprite entity) {
-        super.edit(entity);
+                try {
+            // Check if any sprites with the specified ID exist
+            if (super.find(id) == null) {
+                System.out.println("DEBUG sprite with id " + id + " does not exist");
+                throw new Exception();
+            }
+            // Merge if ID in JSON content matches ID in PathParam
+            else if (id == (long)entity.getId()) {
+                super.edit(entity);
+            }
+            // ID in JSON content does not match ID in PathParam
+            else {
+                System.out.println("DEBUG Ids don't match");
+                throw new Exception();
+            }
+        }
+        catch (Exception e) {
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        }
     }
 
     @DELETE

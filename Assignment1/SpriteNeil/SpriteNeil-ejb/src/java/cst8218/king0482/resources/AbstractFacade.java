@@ -4,6 +4,7 @@
  */
 package cst8218.king0482.resources;
 
+import cst8218.king0482.entity.Sprite;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -28,6 +29,25 @@ public abstract class AbstractFacade<T> {
 
     public void edit(T entity) {
         getEntityManager().merge(entity);
+    }
+    
+    public void update(T entity) {
+        if (!(entity instanceof Sprite)) {
+            return;
+        }
+        
+        Sprite obj = (Sprite)find(((Sprite)entity).getId());
+        if (obj.isSameAs(entity)) {
+            System.out.println("DEBUG The JSON object and existing entity are identical. Not updating");
+            return;
+        }
+        
+        if (((Sprite)entity).getColor() != null) {
+            obj.setColor(((Sprite)entity).getColor());
+        }
+        else {
+            System.out.println("DEBUG The color property in the JSON object is null. Not updating");
+        }
     }
 
     public void remove(T entity) {
