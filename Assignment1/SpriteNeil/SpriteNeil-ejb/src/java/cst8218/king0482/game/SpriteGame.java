@@ -10,8 +10,12 @@ import javax.inject.Inject;
 import javax.ejb.Singleton;
 
 /**
- *
  * @author tgk
+ * @version 1.0
+ * @since 2022-11-10
+ * 
+ * Entity representing the "game" which is implemented
+ * on the client side. 
  */
 @Singleton
 public class SpriteGame {
@@ -47,7 +51,6 @@ public class SpriteGame {
                 try {
                     Thread.sleep(100);  // wake up roughly 10 frames per second
                 } catch (InterruptedException exception) {
-                    exception.printStackTrace();
                 }
             }
         }).start();

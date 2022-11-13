@@ -9,7 +9,6 @@ import javax.inject.Inject;
 import javax.ejb.Stateful;
 
 /**
- *
  * @author tgk
  */
 @Stateful

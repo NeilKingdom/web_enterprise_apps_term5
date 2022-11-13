@@ -2,6 +2,14 @@ package cst8218.king0482.util;
 
 import javax.faces.model.DataModel;
 
+/**
+ * @author tgk
+ * @version 1.0
+ * @since 2022-11-10
+ * 
+ * Manages JSF pages e.g. keeping track of 
+ * next/previous page and page size.
+ */
 public abstract class PaginationHelper {
 
     private final int pageSize;
@@ -54,5 +62,4 @@ public abstract class PaginationHelper {
     public int getPageSize() {
         return pageSize;
     }
-
 }

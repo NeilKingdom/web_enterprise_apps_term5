@@ -7,6 +7,14 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.model.SelectItem;
 
+/**
+ * @author tgk
+ * @version 1.0
+ * @since 2022-11-10
+ * 
+ * Mostly contains the logic for handling errors or 
+ * displaying messages to the client.
+ */
 public class JsfUtil {
 
     public static SelectItem[] getSelectItems(List<?> entities, boolean selectOne) {
@@ -56,5 +64,4 @@ public class JsfUtil {
         String theId = JsfUtil.getRequestParameter(requestParameterName);
         return converter.getAsObject(FacesContext.getCurrentInstance(), component, theId);
     }
-
 }

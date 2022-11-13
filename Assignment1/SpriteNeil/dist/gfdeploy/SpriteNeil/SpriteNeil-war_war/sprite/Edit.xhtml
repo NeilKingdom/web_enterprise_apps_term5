@@ -31,7 +31,7 @@
                     <h:inputText id="dy" value="#{spriteController.selected.dy}" title="#{bundle.EditSpriteTitle_dy}" />
                     <h:outputLabel value="#{bundle.EditSpriteLabel_color}" for="color" />
                     <h:inputText id="color" value="#{spriteController.selected.color}" title="#{bundle.EditSpriteTitle_color}">
-                        <f:converter converterId = "cst8218.king0482.entity.ColorConverter" />
+                        <f:converter converterId = "cst8218.king0482.controller.ColorConverter" />
                     </h:inputText>
                 </h:panelGrid>
                 <h:commandLink action="#{spriteController.update}" value="#{bundle.EditSpriteSaveLink}"/>

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cst8218.king0482.entity;
 
 import java.awt.Color;
@@ -20,8 +15,13 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
- *
  * @author tgk
+ * @version 1.0
+ * @since 2022-11-10
+ * 
+ * The Sprite entity which is used to store attributes
+ * of a Sprite instance to be drawn on the client "game"
+ * application.
  */
 @Entity
 @XmlRootElement
@@ -169,24 +169,6 @@ public class Sprite implements Serializable {
         x += dx;
         y += dy;
     }
-    
-    public void update(Sprite sprite) {
-        if (this.equals(sprite))
-        {
-            return;
-        }
-        
-        this.setPanelWidth(sprite.getPanelWidth());
-        this.setPanelHeight(sprite.getPanelHeight());
-        this.setX(sprite.getX());
-        this.setY(sprite.getY());
-        this.setDx(sprite.getDx());
-        this.setDy(sprite.getDy());
-        if (sprite.getColor() != null)
-        {
-            this.setColor(sprite.getColor());
-        }
-    }
 
     @Override
     public int hashCode() {
@@ -209,30 +191,34 @@ public class Sprite implements Serializable {
         return true;
     }
     
+    /**
+     * @since 2022-11-10
+     * @param object The comparison object
+     * @return Returns true if objects are considered equivalent or false otherwise
+     * 
+     * This function compares the calling object with the object 
+     * passed by reference as an argument. If all of their fields 
+     * match, they are considered to be equivalent, even if they
+     * do not live at the same location in memory.
+     */
     public boolean isSameAs(Object object) {
         if (!(object instanceof Sprite)) {
             return false;
         }
+        
         Sprite other = (Sprite) object;
-        if (!Objects.equals(this.id, other.id)
-         || this.panelWidth != other.panelWidth
-         || this.panelHeight != other.panelHeight
-         || this.x != other.x
-         || this.y != other.y
-         || this.dx != other.dx
-         || this.dy != other.dy
-         || this.color != other.color
-           ) {
-            return false;
-        }
-        else {
-            return true;
-        }
+        return !(!Objects.equals(this.id, other.id)
+                || this.panelWidth != other.panelWidth
+                || this.panelHeight != other.panelHeight
+                || this.x != other.x
+                || this.y != other.y
+                || this.dx != other.dx
+                || this.dy != other.dy
+                || this.color != other.color);
     }
 
     @Override
     public String toString() {
         return "entities.Sprite[ id=" + id + " ]";
     }
-
 }

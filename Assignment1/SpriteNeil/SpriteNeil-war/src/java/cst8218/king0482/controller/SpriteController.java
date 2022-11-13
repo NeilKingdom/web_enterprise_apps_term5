@@ -19,6 +19,14 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
+/**
+ * @author tgk
+ * @version 1.0
+ * @since 2022-11-10
+ * 
+ * Controller for the JSF pages relating to the
+ * Sprite entity.
+ */
 @Named(value="spriteController")
 @SessionScoped
 public class SpriteController implements Serializable {
@@ -233,8 +241,28 @@ public class SpriteController implements Serializable {
 
     }
     
-    @FacesConverter("cst8218.king0482.entity.ColorConverter")
+    /**
+     * @author Neil Kingdom
+     * @version 1.0
+     * @since 2022-11-10
+     * 
+     * Converter class for color objects. Takes a string
+     * in the format #nnnnnn or [r=nnn, g=nnn, b=nnn] and
+     * converts it to a java.awt.Color object.
+     */
+    @FacesConverter("cst8218.king0482.controller.ColorConverter")
     public static class ColorConverter implements Converter {
+        
+        /**
+         * @since 2022-11-10
+         * @param facesContext The context class for the JavaServer Faces request
+         * @param component The component tree for the JavaServer Faces request
+         * @param value The input string to parse
+         * @return A java.awt Color object
+         * 
+         * Parses an input string and attempts to convert it to
+         * a java.awt.Color object.
+         */
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) { 
             if (value == null || value.length() == 0) {
@@ -338,12 +366,31 @@ public class SpriteController implements Serializable {
             return null;
         }
 
+        /**
+         * @since 2022-11-10
+         * @param value The color object to string-ify
+         * @return A String representation of the input Color object
+         * 
+         * Takes a Color object and converts it to a String.
+         */
         String getColorHex(Color value) {
             return "[r=" + value.getRed() 
                     + ", g=" + value.getGreen() 
                     + ", b=" + value.getBlue() + "]";
         }
 
+        /**
+         * @since 2022-11-10
+         * @param facesContext The context class for the JavaServer Faces request
+         * @param component The component tree for the JavaServer Faces request
+         * @param object The incoming object
+         * @throws IllegalArgumentException If object is not of base type Sprite
+         * @return A String representation of the input Color object
+         * 
+         * A wrapper function for getColorHex() that does additional
+         * input validation i.e. checking if the object is null and
+         * that it is of type java.awt.Color.
+         */
         @Override
         public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
             if (object == null) {
@@ -357,5 +404,4 @@ public class SpriteController implements Serializable {
             }
         }
     }
-
 }
