@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>React Local</title>
+    <!-- Import the React, React-Dom and Babel libraries from unpkg -->
+    <script src="https://unpkg.com/react@16.0.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+    
+    <style>
+        table, tr, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        // Obtain the root 
+        const rootElement = document.getElementById('root');
+        // Create an ES6 class component    
+        class ContactList extends React.Component { 
+            // Use the render() function to return a JSX component
+            constructor(props) {
+                super(props);
+                this.state = { count: "", contactsstring: "", contacts: [] };
+            }
+        
+            // System invokes this function
+            componentDidMount() {
+                this.getContacts();
+            }
+        
+            // Return a list of contacts using the RESTful API of the web app
+            getContacts() {
+                fetch("http://192.168.2.14:8080/com.mycompany_mavenproject5-1/resources/com.mycompany.mavenproject5.contact",
+                {headers: {'Accept': 'application/json'}})             // Tell RESTful service we're only accepting JSON
+                .then(res => res.json())                                // Parse result as JSON
+                .then(resjson => this.setState({contacts: resjson}));   // Set state for this.state.contacts as the 
+            }
+        
+            // Use the render function to return JSX component      
+            render() { 
+                const valuesArray = this.state.contacts;
+                return (
+                    <div className="contact-list">
+                        <h1>Contact List {this.props.name}</h1>
+                        <ul>
+                            <li>count: {this.state.count}</li>
+                            <li>array size: {valuesArray.length}</li>
+                            <table>
+                                <tr>
+                                    <td>First Name</td>
+                                    <td>Last Name</td>
+                                    <td>Home Phone</td>
+                                </tr>
+                                {valuesArray.map((item,key)=>{return <tr key={key}><td>{item.firstname}</td><td>{item.lastname}</td><td>{item.homephone}</td></tr>;})}
+                            </table>
+                        </ul>
+                    </div>
+                );
+            }
+        }
+    
+        // Create a function to wrap up your component
+        function App() {
+            return(
+                <div>
+                    <ContactList name="Using React!"/>
+                </div>
+            );
+        }
+
+        // Render contents of App() function and rootElement i.e. contents of render()
+        ReactDOM.render(<App />, rootElement);
+    </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>React Local</title>
+  <script type="application/javascript" src="https://unpkg.com/react@16.0.0/umd/react.production.min.js"></script>
+  <script type="application/javascript" src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js"></script>
+  <script type="application/javascript" src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+        <script type="text/babel">
+        // Obtain the root
+            const rootElement = document.getElementById('root');
+            // Create a ES6 class component
+            class SpriteList extends React.Component {
+            // Use the render function to return JSX component
+            constructor(props) {
+                super(props);
+                this.state = { count: "", sprite:"", sprites: [] };
+            }
+            getSprites(){
+                    //fetch("https://fakestoreapi.com/products",{
+                    fetch("http://localhost:8080/SpriteJohn-war/webresources/cst8218.hoan0105.entity.sprite/",{
+                    headers: {'Accept': 'application/json'}})
+                    .then(res => res.json())
+                    .then(resjson => this.setState({sprites: resjson}));
+                    //.then(res => console.log(res));
+                }
+            getCount(){
+                    fetch("http://admin:pass@172.21.96.1:8080/SpriteJohn-war/webresources/cst8218.hoan0105.entity.sprite/count"
+                    ,{headers:{'Accept': 'application/json'}})
+                    //,{headers: {'Accept': 'text/html,*/*'}})
+                            //.then(res => console.log(res));
+                    .then(res => res.json())
+                    .then(res => this.setState({count: res }));
+                }
+            // componentDidMount() is called by the system
+            componentDidMount() {
+                this.getSprites();
+                //this.getCount();
+            }
+            render() {
+                const valuesArray = this.state.sprites;
+                return (
+                    <div className="list">
+                        <h1>Sprites List {this.props.name}</h1>
+                        <ul>
+                        <li>count: {this.state.count}</li>
+                        <li>array size: {valuesArray.length} </li></ul>
+                        <table border="1">
+                            <tr>
+                                <th>ID</th>
+                                <th>Position X</th>
+                                <th>Position Y</th>
+                                <th>Speed Dx</th>
+                                <th>Speed Dy</th>
+                            </tr>
+                        {valuesArray.map((item,key)=>{return <tr key={key}><td>{item.id}</td>{item.x}<td>{item.y}</td>{item.dx}<td>{item.dy}</td></tr>})}
+                       </table>
+                    </div>
+                    );
+                }
+            }
+            // Create a function to wrap up your component
+            function App(){
+                return(
+                        <div>
+                        <SpriteList name="Using React!"/>
+                        </div>
+                   )
+            }
+            // Use the ReactDOM.render to show your component on the browser
+            ReactDOM.render(
+                <App />,
+                rootElement,                       
+            );
+        </script>
+    </body>
+</html>
+                
+          

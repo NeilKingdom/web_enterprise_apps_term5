@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditSpriteTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditSpriteLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{spriteController.selected.id}" title="#{bundle.EditSpriteTitle_id}" />
+                    <h:outputLabel value="#{bundle.EditSpriteLabel_panelWidth}" for="panelWidth" />
+                    <h:inputText id="panelWidth" value="#{spriteController.selected.panelWidth}" title="#{bundle.EditSpriteTitle_panelWidth}" />
+                    <h:outputLabel value="#{bundle.EditSpriteLabel_panelHeight}" for="panelHeight" />
+                    <h:inputText id="panelHeight" value="#{spriteController.selected.panelHeight}" title="#{bundle.EditSpriteTitle_panelHeight}" />
+                    <h:outputLabel value="#{bundle.EditSpriteLabel_x}" for="x" />
+                    <h:inputText id="x" value="#{spriteController.selected.x}" title="#{bundle.EditSpriteTitle_x}" />
+                    <h:outputLabel value="#{bundle.EditSpriteLabel_y}" for="y" />
+                    <h:inputText id="y" value="#{spriteController.selected.y}" title="#{bundle.EditSpriteTitle_y}" />
+                    <h:outputLabel value="#{bundle.EditSpriteLabel_dx}" for="dx" />
+                    <h:inputText id="dx" value="#{spriteController.selected.dx}" title="#{bundle.EditSpriteTitle_dx}" />
+                    <h:outputLabel value="#{bundle.EditSpriteLabel_dy}" for="dy" />
+                    <h:inputText id="dy" value="#{spriteController.selected.dy}" title="#{bundle.EditSpriteTitle_dy}" />
+                    <h:outputLabel value="#{bundle.EditSpriteLabel_color}" for="color" />
+                    <h:inputText id="color" value="#{spriteController.selected.color}" title="#{bundle.EditSpriteTitle_color}">
+                        <f:converter converterId = "cst8218.king0482.controller.ColorConverter" />
+                    </h:inputText>
+                </h:panelGrid>
+                <h:commandLink action="#{spriteController.update}" value="#{bundle.EditSpriteSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditSpriteViewLink}"/>
+                <br />
+                <h:commandLink action="#{spriteController.prepareList}" value="#{bundle.EditSpriteShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditSpriteIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

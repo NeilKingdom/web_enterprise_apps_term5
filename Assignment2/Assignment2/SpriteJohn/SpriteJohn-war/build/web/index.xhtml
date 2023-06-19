@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="#{spriteController.language}"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+    </h:head>
+    <h:body>
+        Hello from Facelets
+        <h:form>
+        <h:selectOneMenu value="#{spriteController.language}" onchange="submit()">
+        <f:selectItem itemValue="en" itemLabel="English" />
+        <f:selectItem itemValue="fr" itemLabel="French" />
+        <f:selectItem itemValue="es" itemLabel="Español" />
+        </h:selectOneMenu>
+        </h:form>
+        <br />
+        <h:link outcome="/appUser/List" value="Show All AppUser Items"/>
+        <br />
+        <h:link outcome="/sprite/List" value="Show All Sprite Items"/>
+        <br />
+        <h:link outcome="/sprite/Create" value="Create Sprite"/>
+        <h:form>
+            <f:view>
+                <h:form>
+                    <h1><h:outputText value="Sprite List"/></h1>
+                    <h:dataTable value="#{spriteController.findAll()}" var="item" border="1">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="PanelWidth"/>
+                            </f:facet>
+                            <h:outputText value="#{item.panelWidth}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="PanelHeight"/>
+                            </f:facet>
+                            <h:outputText value="#{item.panelHeight}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="X"/>
+                            </f:facet>
+                            <h:outputText value="#{item.x}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Y"/>
+                            </f:facet>
+                            <h:outputText value="#{item.y}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Dx"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dx}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Dy"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dy}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Color"/>
+                            </f:facet>
+                            <h:outputText value="#{item.color}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </f:view>
+
+        </h:form>
+        
+    </h:body>
+
+
+</html>
+
