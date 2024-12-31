@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateContactTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateContactLabel_firstname}" for="firstname" />
+                    <h:inputText id="firstname" value="#{contactController.selected.firstname}" title="#{bundle.CreateContactTitle_firstname}" />
+                    <h:outputLabel value="#{bundle.CreateContactLabel_lastname}" for="lastname" />
+                    <h:inputText id="lastname" value="#{contactController.selected.lastname}" title="#{bundle.CreateContactTitle_lastname}" />
+                    <h:outputLabel value="#{bundle.CreateContactLabel_birthday}" for="birthday" />
+                    <h:inputText id="birthday" value="#{contactController.selected.birthday}" title="#{bundle.CreateContactTitle_birthday}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateContactLabel_homephone}" for="homephone" />
+                    <h:inputText id="homephone" value="#{contactController.selected.homephone}" title="#{bundle.CreateContactTitle_homephone}" />
+                    <h:outputLabel value="#{bundle.CreateContactLabel_mobilephone}" for="mobilephone" />
+                    <h:inputText id="mobilephone" value="#{contactController.selected.mobilephone}" title="#{bundle.CreateContactTitle_mobilephone}" />
+                    <h:outputLabel value="#{bundle.CreateContactLabel_email}" for="email" />
+                    <h:inputText id="email" value="#{contactController.selected.email}" title="#{bundle.CreateContactTitle_email}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{contactController.create}" value="#{bundle.CreateContactSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{contactController.prepareList}" value="#{bundle.CreateContactShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateContactIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
